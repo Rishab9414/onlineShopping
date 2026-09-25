@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" role="img" aria-labelledby="title">
+  <title id="title">Clothing image placeholder</title>
+  <defs><linearGradient id="b" x2="1" y2="1"><stop stop-color="#fbf4e9"/><stop offset="1" stop-color="#ead9c6"/></linearGradient></defs>
+  <rect width="800" height="960" fill="url(#b)"/>
+  <circle cx="400" cy="410" r="270" fill="#fffaf2" stroke="#d7b56d" stroke-width="3"/>
+  <path d="M310 262c25 43 155 43 180 0l112 92-75 104-39-29 38 307H274l38-307-39 29-75-104Z" fill="#7b1838"/>
+  <path d="M338 260c12 58 112 58 124 0" fill="none" stroke="#d7b56d" stroke-width="14"/>
+  <path d="M314 476h172M300 542h200M291 608h218" fill="none" stroke="#d7b56d" stroke-width="8" stroke-dasharray="4 15"/>
+  <text x="400" y="825" text-anchor="middle" fill="#6f1231" font-family="Georgia,serif" font-size="34">Ridhi Sidhi Garments</text>
+  <text x="400" y="865" text-anchor="middle" fill="#8c6b35" font-family="Arial,sans-serif" font-size="16" letter-spacing="5">WOMENSWEAR</text>
+</svg>

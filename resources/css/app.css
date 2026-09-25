@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --brand-red: #761737;
+        --brand-black: #32161f;
+        --brand-dark: #4f1028;
+        --brand-gold: #c39a50;
+        --brand-cream: #fffaf2;
+    }
+    html {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100%;
+        background: var(--brand-cream);
+        color: var(--brand-black);
+    }
+
+    img,
+    video,
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        max-width: 100%;
+    }
+}
+
+@layer components {
+    .ethnic-card {
+        @apply rounded-2xl border bg-white shadow-sm transition duration-300;
+        border-color: rgba(195, 154, 80, .25);
+    }
+    .ethnic-card:hover {
+        border-color: rgba(118, 23, 55, .28);
+        box-shadow: 0 18px 45px rgba(79, 16, 40, .10);
+    }
+    .gold-rule {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
+    }
+    .chip-scroll {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        overscroll-behavior-x: contain;
+    }
+    .chip-scroll::-webkit-scrollbar {
+        display: none;
+    }
+    .chip {
+        @apply shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors;
+        border-color: rgba(50, 22, 31, .12);
+        background: #fff;
+        color: var(--brand-black);
+    }
+    .chip-active {
+        background: var(--brand-red);
+        border-color: var(--brand-red);
+        color: #fff;
+    }
+}
+
+@layer utilities {
+    @keyframes marquee {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+    @keyframes float {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-12px) rotate(3deg); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(118, 23, 55, 0.35); }
+        50% { box-shadow: 0 0 0 12px rgba(118, 23, 55, 0); }
+    }
+    @keyframes slideIn {
+        from { opacity: 0; transform: scale(1.05); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .animate-marquee {
+        animation: marquee 30s linear infinite;
+    }
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
+    }
+    .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+    }
+    .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+    .animate-slide-in {
+        animation: slideIn 0.7s ease-out forwards;
+    }
+    @keyframes themeConfettiFall {
+        0% { transform: translateY(-12vh) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(112vh) rotate(720deg); opacity: 0.35; }
+    }
+    @keyframes themeSparkle {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 1; }
+    }
+    @keyframes themeSparkleFall {
+        0% { transform: translateY(-12vh) scale(0.8) rotate(0deg); }
+        100% { transform: translateY(112vh) scale(1.1) rotate(180deg); }
+    }
+    @keyframes themeSnowFall {
+        0% { transform: translateY(-12vh) translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(112vh) translateX(30px) rotate(360deg); opacity: 0.5; }
+    }
+    .theme-confetti {
+        top: -8vh;
+        opacity: 0.9;
+        animation: themeConfettiFall 8s linear infinite;
+    }
+    .theme-sparkle {
+        top: -8vh;
+        color: var(--brand-red, #761737);
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.9), 0 0 16px var(--brand-red, #761737);
+        animation: themeSparkleFall 9s linear infinite, themeSparkle 2.2s ease-in-out infinite;
+    }
+    .theme-snow {
+        top: -8vh;
+        color: #fff;
+        text-shadow: 0 0 6px rgba(147, 197, 253, 0.9), 0 1px 2px rgba(0, 0, 0, 0.35);
+        animation: themeSnowFall 10s linear infinite;
+    }
+}

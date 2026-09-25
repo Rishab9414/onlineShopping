@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .admin-sidebar-link {
+        @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-rose-100/70 transition-all duration-200 hover:bg-white/10 hover:text-white;
+    }
+    .admin-sidebar-link.active {
+        @apply bg-white/15 text-white shadow-lg;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, .18), inset 3px 0 #d7b56d;
+    }
+    .admin-stat-card {
+        @apply bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-300;
+    }
+    .admin-input {
+        @apply w-full px-4 py-3 bg-amber-50/40 border border-amber-900/10 rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all duration-200;
+        --tw-ring-color: rgba(118, 23, 55, .25);
+    }
+    .admin-input-error {
+        @apply border-red-500 bg-red-50 ring-2 ring-red-200 focus:border-red-500 focus:ring-red-200;
+    }
+    .admin-field-error {
+        @apply text-red-600 text-xs mt-1 font-medium;
+    }
+}

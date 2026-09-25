@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\RazorpayService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
+
+class WebhookController extends Controller
+{
+    public function razorpay(Request $request, RazorpayService $razorpay): JsonResponse
+    {
+        $payload = $request->getContent();
+        $signature = $request->header('X-Razorpay-Signature');
+        $webhookSecret = config('razorpay.webhook_secret');
+
+        if ($webhookSecret && $signature) {
+            try {
+                (new Api(config('razorpay.key_id'), config('razorpay.key_secret')))
+                    ->utility
+                    ->verifyWebhookSignature($payload, $signature, $webhookSecret);
+            } catch (SignatureVerificationError $e) {
+                Log::warning('Razorpay webhook signature invalid', ['message' => $e->getMessage()]);
+
+                return response()->json(['success' => false], 400);
+            }
+        } elseif ($this->shouldVerifyWebhook()) {
+            Log::warning('Razorpay webhook rejected: missing signature or RAZORPAY_WEBHOOK_SECRET');
+
+            return response()->json(['success' => false, 'message' => 'Webhook not configured'], 400);
+        }
+
+        $data = $request->all();
+        Log::info('Razorpay webhook received', ['event' => $data['event'] ?? null]);
+
+        $razorpay->handleWebhook($data);
+
+        return response()->json(['success' => true]);
+    }
+
+    private function shouldVerifyWebhook(): bool
+    {
+        return app()->environment('production') && filled(config('razorpay.key_id'));
+    }
+}
